@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+aichat/__init__.py
+aichat/client.py
+aichat/errors.py
+aichat/types.py
+aichat_sdk.egg-info/PKG-INFO
+aichat_sdk.egg-info/SOURCES.txt
+aichat_sdk.egg-info/dependency_links.txt
+aichat_sdk.egg-info/requires.txt
+aichat_sdk.egg-info/top_level.txt
