@@ -1,0 +1,63 @@
+{
+  "name": "@chatflow/angular",
+  "version": "1.0.0",
+  "description": "Official Angular SDK for ChatFlow - Real-time chat with SignalR",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "ng-packagr -p ng-package.json",
+    "test": "karma start --single-run",
+    "test:watch": "karma start",
+    "lint": "eslint src --ext .ts"
+  },
+  "keywords": [
+    "chatflow",
+    "angular",
+    "chat",
+    "signalr",
+    "real-time",
+    "websocket"
+  ],
+  "author": "ChatFlow Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChatFlowPlatform/chatflow-sdks"
+  },
+  "peerDependencies": {
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "rxjs": "^7.0.0"
+  },
+  "dependencies": {
+    "@microsoft/signalr": "^8.0.7",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@angular/common": "^19.2.18",
+    "@angular/compiler": "^19.2.18",
+    "@angular/compiler-cli": "^19.2.18",
+    "@angular/core": "^19.2.18",
+    "@angular/platform-browser": "^19.2.18",
+    "@angular/platform-browser-dynamic": "^19.2.18",
+    "@types/jasmine": "^5.1.4",
+    "jasmine-core": "^5.4.0",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-jasmine": "^5.1.0",
+    "karma-jasmine-html-reporter": "^2.1.0",
+    "ng-packagr": "^18.2.1",
+    "rxjs": "^7.8.1",
+    "typescript": "~5.7.2",
+    "zone.js": "~0.15.0"
+  },
+  "engines": {
+    "node": ">=18.19.1 || >=20.11.1"
+  }
+}

@@ -1,0 +1,49 @@
+name: Publish Python Package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'python/**'
+      - '.github/workflows/publish-pypi.yml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./python
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+          pip install -r requirements-dev.txt || pip install pytest pytest-asyncio pytest-cov black ruff mypy
+      
+      - name: Run tests
+        run: |
+          pytest tests/ -v --cov=aichat --cov-report=term-missing
+      
+      - name: Lint
+        run: |
+          black --check aichat/
+          ruff check aichat/
+          mypy aichat/
+      
+      - name: Build package
+        run: python -m build
+      
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          twine upload dist/*

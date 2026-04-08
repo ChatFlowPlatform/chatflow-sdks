@@ -1,27 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     
-    <PackageId>AIChatSDK</PackageId>
-    <Version>1.0.0</Version>
-    <Authors>AI Chat Team</Authors>
-    <Company>AI Chat</Company>
-    <Description>Official .NET SDK for AI Chat SaaS platform</Description>
-    <PackageTags>ai;chat;chatbot;sdk;websocket;real-time;signalr</PackageTags>
+    <PackageId>ChatFlow.SDK</PackageId>
+    <Version>2.0.0</Version>
+    <Authors>ChatFlow Team</Authors>
+    <Company>ChatFlow Platform</Company>
+    <Description>Official .NET 10 SDK for ChatFlow - Real-time chat with SignalR</Description>
+    <PackageTags>chatflow;ai;chat;chatbot;sdk;websocket;real-time;signalr;dotnet10</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://aichat.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/aichat/sdk-dotnet</RepositoryUrl>
+    <PackageProjectUrl>https://chatflow.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ChatFlowPlatform/chatflow-sdks</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.0" />
     <PackageReference Include="System.Text.Json" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.0" />
   </ItemGroup>
 
 </Project>

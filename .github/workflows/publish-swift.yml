@@ -1,0 +1,38 @@
+name: Publish Swift Package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'swift/**'
+      - '.github/workflows/publish-swift.yml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./swift
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+      
+      - name: Build
+        run: swift build
+      
+      - name: Run tests
+        run: swift test
+      
+      - name: Create Git Tag
+        run: |
+          VERSION=$(grep 'version:' Package.swift | sed 's/.*"\(.*\)".*/\1/')
+          git tag $VERSION
+          git push origin $VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      # Note: Swift packages are published via GitHub releases and Package.swift
+      # The package is available automatically via SPM once tagged

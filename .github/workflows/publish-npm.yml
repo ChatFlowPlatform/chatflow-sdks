@@ -1,0 +1,121 @@
+name: Publish NPM Packages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'javascript/**'
+      - 'react/**'
+      - 'angular/**'
+      - '.github/workflows/publish-npm.yml'
+  workflow_dispatch:
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      javascript: ${{ steps.filter.outputs.javascript }}
+      react: ${{ steps.filter.outputs.react }}
+      angular: ${{ steps.filter.outputs.angular }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            javascript:
+              - 'javascript/**'
+            react:
+              - 'react/**'
+            angular:
+              - 'angular/**'
+
+  publish-javascript:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.javascript == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./javascript
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: npm test
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-react:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.react == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./react
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: npm test
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-angular:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.angular == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./angular
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: npm test
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Publish to npm
+        run: npm publish ./dist --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

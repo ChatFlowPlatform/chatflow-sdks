@@ -1,0 +1,25 @@
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
+  roots: ['<rootDir>/src'],
+  testMatch: ['**/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts'],
+  transform: {
+    '^.+\\.ts$': 'ts-jest',
+  },
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    '!src/**/*.spec.ts',
+    '!src/**/*.test.ts',
+  ],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html'],
+  moduleFileExtensions: ['ts', 'js', 'json'],
+  globals: {
+    'ts-jest': {
+      tsconfig: {
+        esModuleInterop: true,
+        allowSyntheticDefaultImports: true,
+      },
+    },
+  },
+};
