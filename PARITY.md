@@ -48,9 +48,9 @@ Regenerated on: 2026-09-03
 
 | SDK | Create conv. | List convs. | Get conv. | Close conv. | Send msg | Get msgs | Mark read | Typing |
 |---|---|---|---|---|---|---|---|---|
-| JavaScript / TypeScript | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| JavaScript / TypeScript | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | React | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ✅ |
-| Angular | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Angular | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Widget (Vanilla JS, embeddable) | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ✅ |
 | .NET / C# | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Python | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
