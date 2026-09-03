@@ -205,7 +205,7 @@ let client = ErghiClient(config: ErghiConfig(
 try await client.auth.login(email: "user@example.com", password: "password")
 ```
 
-→ [Full Swift docs](./swift/README.md)
+→ [Full Swift docs](https://github.com/ErghiPlatform/erghi-sdk-swift#readme)
 
 ---
 
@@ -227,8 +227,10 @@ erghi-sdks (this repo)
 ├── widget/       — Embeddable vanilla JS widget
 ├── dotnet/       — .NET 10 SDK with SignalR
 ├── python/       — Async Python SDK
-├── flutter/      — Flutter/Dart SDK
-└── swift/        — Swift SDK (iOS/macOS/tvOS/watchOS)
+└── flutter/      — Flutter/Dart SDK
+
+erghi-sdk-swift (separate repo — SPM requires Package.swift at repo root)
+└── Swift SDK (iOS/macOS/tvOS/watchOS)
 ```
 
 ## Authentication Flow
