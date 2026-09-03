@@ -63,11 +63,13 @@ jobs:
             exit 0
           fi
           # Defensive fallback: if the before-SHA isn't reachable in this
-          # checkout for any reason (e.g. history rewrite), fail loud rather
-          # than silently comparing against the wrong thing.
+          # checkout for any reason (e.g. history rewrite), fail the run --
+          # a missed version bump means a real publish silently never
+          # happens, which deserves a red job, not an easy-to-miss warning
+          # annotation on an otherwise-green one.
           if ! git cat-file -e "$BEFORE_SHA" 2>/dev/null; then
-            echo "::warning::github.event.before ($BEFORE_SHA) is not present in this checkout -- skipping detection this run rather than risk comparing against the wrong base. If this recurs, main's history may have been rewritten (force-push)."
-            exit 0
+            echo "::error::github.event.before ($BEFORE_SHA) is not present in this checkout -- cannot safely detect version bumps this run rather than risk comparing against the wrong base. If this recurs, main's history may have been rewritten (force-push). Check manually whether a release was missed."
+            exit 1
           fi
 
           changed_files="$(git diff --name-only "$BEFORE_SHA" "$AFTER_SHA")"
